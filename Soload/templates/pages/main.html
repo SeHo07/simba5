@@ -1,6 +1,96 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Soload{% endblock %}
+
 {% block content %}
-<h1>홈페이지 연결 성공</h1>
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<main class = "mainpage">
+    <section class = "mainpage_left">
+
+        <section class = "level-section">
+            <div class = "level-section-badge">
+                <span class = "level">{{ user_profile.level }}</span>
+                <span class = "level_name">{{ user_profile.level_name }}</span>
+            </div>
+
+            <div class = "level-section_info">
+                <span class = "my_level">나의 레벨 : {{ user_profile.level_name }} ({{ user_profile.level }})</span>
+                <p>후기를 작성하고 레벨을 올려보세요!</p>
+
+                <div class = "level-section_exp-text">
+                    다음 레벨까지 {{ user_profile.current_exp }} / {{ user_profile.required_exp }} EXP
+                </div>
+
+                <div class = "level-section_progress">
+                    <div class = "level-section_progress-fill"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class = "recommend-section">
+            <span class = "level-recommend-place">레벨에 따른 장소 추천</span>
+
+            <div class = "place-card-list">
+
+                <article class = "place-card">
+                    <span class = "place-card_tag">{{ place.level }} 추천</span>
+                    <div class = "place-card_image">
+                        <img src = "{{place.image.url}}" alt = "{{ place.name }}">
+                    </div>
+
+                    <div class = "place-card_body">
+                        <span class = "place-name">{{ place.name }}</span>
+                        <p>{{ place.location }}</p>
+                        <button type = "button" class = "place-card_like">♡</button>
+                    </div>
+                </article>
+
+                <article class = "place-card">
+                    <span class = "place-card_tag">{{ place.level }} 추천</span>
+                    <div class = "place-card_image">
+                        <img src = "{{place.image.url}}" alt = "{{ place.name }}">
+                    </div>
+
+                    <div class = "place-card_body">
+                        <span class = "place-name">{{ place.name }}</span>
+                        <p>{{ place.location }}</p>
+                        <button type = "button" class = "place-card_like">♡</button>
+                    </div>
+                </article>
+
+                <article class = "place-card">
+                    <span class = "place-card_tag">{{ place.level }} 추천</span>
+                    <div class = "place-card_image">
+                        <img src = "{{place.image.url}}" alt = "{{ place.name }}">
+                    </div>
+
+                    <div class = "place-card_body">
+                        <span class = "place-name">{{ place.name }}</span>
+                        <p>{{ place.location }}</p>
+                        <button type = "button" class = "place-card_like">♡</button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </section>
+
+    <section class = "map-section">
+        <div class = "map-section_search">
+            <input type = "text" placeholder="장소를 입력하세요">
+            <button type="button">🔍</button>
+        </div>
+
+        <div class = "map-section_map">
+            지도
+
+            <div class = "map-control">
+                <button type = "button">+</button>
+                <button type = "button">-</button>
+                <button type = "button">@</button>
+            </div>
+        </div>
+    </section>
+</main>
 {% endblock %}
