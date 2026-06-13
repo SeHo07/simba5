@@ -1,4 +1,76 @@
 {% extends 'base.html' %}
-{% block content %}
+{% load static %}
 
+{% block title %}마이페이지 | Soload{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/mypage.css' %}">
+<main class = "mypage">
+    <section class = "mypage_profile-section">
+        <div class = "mypage_character-card">
+            <img src="{{ user_profile.character_image.url }}" alt="{{ user_profile.level_name}}" class="mypage_character-image">
+        </div>
+
+        <div class = "mypage_level-info">
+            <span class = "mypage_level-title">
+                나의 레벨 : {{ user_profile.level_name}} (LV.{{ user_profile.lever }})
+            </span>
+
+            <p class = "mypage_level-discription">
+                후기를 작성하고 레벨을 올려보세요!
+            </p>
+
+            <div class = "mypage_exp-text">
+                다음 레벨까지 {{ user_profile.current_exp }} / {{ user_profile.required_exp}} EXP
+            </div>
+
+            <div class = "mypage_progress">
+                <div class = "mypage_progress-fill"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class = "myage_activity-section">
+        <section class = "growth-section">
+            <div class = "growth-section_title">병아리 성장단계</div>
+            <div class = "growth-stage-list">
+                <div class = "growth-stage">
+                    <img src="{% static 'images/chick-stage-1.png' %}" alt = "1단계 병아리">
+                </div>
+                <div class = "growth-stage">
+                    <img src="{% static 'images/chick-stage-2.png' %}" alt = "2단계 병아리">
+                </div>
+                <div class = "growth-stage">
+                    <img src="{% static 'images/chick-stage-3.png' %}" alt = "3단계 병아리">
+                </div>
+                <div class = "growth-stage">
+                    <img src="{% static 'images/chick-stage-4.png' %}" alt = "4단계 병아리">
+                </div>
+                <div class = "growth-stage">
+                    <img src="{% static 'images/chick-stage-5.png' %}" alt = "5단계 병아리">
+                </div>
+            </div>
+
+            <div class = "growth-section_description">
+                레벨을 올리고 새로운 병아리를 만나보세요!
+            </div>
+        </section>
+
+        <section class = "mypage_menu-section">
+            <button type="button" class="mypage_activity-button">
+                내 활동 보기
+            </button>
+
+            <a href="#" class = "mypage_menu-button">
+                장소 찜<br>
+                목록
+            </a>
+
+            <a href="#" class = "mypage_menu-button">
+                작성 후기<br>
+                모아보기
+            </a>
+        </section>
+    </section>
+</main>
 {% endblock %}
