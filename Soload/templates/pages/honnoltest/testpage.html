@@ -1,4 +1,418 @@
 {% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/testpage.css' %}">
 
+<main class = "testpage">
+    <section class="testpage_main"> 
+        <div class="question-card">
+
+            <div class="question-progress">
+                <span id="current-question-number">1</span> / 10
+            </div>
+
+            <div class="question-progress-bar">
+                <div class="question-progress-fill" id="question-progress-fill"></div>
+            </div>
+
+            <section class="question-list">
+                <article class="question-item question-item--active" data-question="1">
+                    <div class="question-title">혼자 밥을 먹는 것이 얼마나 편한가요?</div>
+
+                    <div class="answer-list">
+                        <label class="answer-option">
+                            <input type="radio" name="question-1" value="1" class="answer-radio" data-score="1">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-1" value="2" class="answer-radio" data-score="2">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-1" value="3" class="answer-radio" data-score="3">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">보통이다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-1" value="4" class="answer-radio" data-score="4">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-1" value="5" class="answer-radio" data-score="5">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇다</span>
+                        </label>
+                    </div>
+                </article>
+
+                <article class="question-item" data-question="2">
+                    <div class="question-title">혼자 카페에 오래 앉아있는 것이 편한가요?</div>
+
+                    <div class="answer-list">
+                        <label class="answer-option">
+                            <input type="radio" name="question-2" value="1" class="answer-radio" data-score="1">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-2" value="2" class="answer-radio" data-score="2">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-2" value="3" class="answer-radio" data-score="3">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">보통이다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-2" value="4" class="answer-radio" data-score="4">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-2" value="5" class="answer-radio" data-score="5">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇다</span>
+                        </label>
+                    </div>
+                </article>
+
+                <article class="question-item" data-question="3">
+                    <div class="question-title">혼자 새로운 장소에 가는 것이 부담스럽지 않나요?</div>
+
+                    <div class="answer-list">
+                        <label class="answer-option">
+                            <input type="radio" name="question-3" value="1" class="answer-radio" data-score="1">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-3" value="2" class="answer-radio" data-score="2">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-3" value="3" class="answer-radio" data-score="3">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">보통이다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-3" value="4" class="answer-radio" data-score="4">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-3" value="5" class="answer-radio" data-score="5">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇다</span>
+                        </label>
+                    </div>
+                </article>
+
+                <article class="question-item" data-question="4">
+                    <div class="question-title">혼자 영화나 전시를 보는 것이 자연스럽게 느껴지나요?</div>
+
+                    <div class="answer-list">
+                        <label class="answer-option">
+                            <input type="radio" name="question-4" value="1" class="answer-radio" data-score="1">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-4" value="2" class="answer-radio" data-score="2">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-4" value="3" class="answer-radio" data-score="3">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">보통이다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-4" value="4" class="answer-radio" data-score="4">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-4" value="5" class="answer-radio" data-score="5">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇다</span>
+                        </label>
+                    </div>
+                </article>
+
+                <article class="question-item" data-question="5">
+                    <div class="question-title">혼자 있을 때 주변의 시선을 신경쓰나요?</div>
+
+                    <div class="answer-list">
+                        <label class="answer-option">
+                            <input type="radio" name="question-5" value="1" class="answer-radio" data-score="1">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-5" value="2" class="answer-radio" data-score="2">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-5" value="3" class="answer-radio" data-score="3">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">보통이다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-5" value="4" class="answer-radio" data-score="4">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-5" value="5" class="answer-radio" data-score="5">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇다</span>
+                        </label>
+                    </div>
+                </article>
+
+                <article class="question-item" data-question="6">
+                    <div class="question-title">혼자 식당에 들어가 주문을 하는 것이 어렵나요?</div>
+
+                    <div class="answer-list">
+                        <label class="answer-option">
+                            <input type="radio" name="question-6" value="1" class="answer-radio" data-score="1">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-6" value="2" class="answer-radio" data-score="2">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-6" value="3" class="answer-radio" data-score="3">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">보통이다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-6" value="4" class="answer-radio" data-score="4">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-6" value="5" class="answer-radio" data-score="5">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇다</span>
+                        </label>
+                    </div>
+                </article>
+
+                <article class="question-item" data-question="7">
+                    <div class="question-title">혼자 시간을 보내는 것이 즐겁다고 느끼나요?</div>
+
+                    <div class="answer-list">
+                        <label class="answer-option">
+                            <input type="radio" name="question-7" value="1" class="answer-radio" data-score="1">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-7" value="2" class="answer-radio" data-score="2">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-7" value="3" class="answer-radio" data-score="3">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">보통이다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-7" value="4" class="answer-radio" data-score="4">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-7" value="5" class="answer-radio" data-score="5">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇다</span>
+                        </label>
+                    </div>
+                </article>
+
+                <article class="question-item" data-question="8">
+                    <div class="question-title">혼자 하는 활동이 익숙한가요?</div>
+
+                    <div class="answer-list">
+                        <label class="answer-option">
+                            <input type="radio" name="question-8" value="1" class="answer-radio" data-score="1">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-8" value="2" class="answer-radio" data-score="2">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-8" value="3" class="answer-radio" data-score="3">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">보통이다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-8" value="4" class="answer-radio" data-score="4">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-8" value="5" class="answer-radio" data-score="5">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇다</span>
+                        </label>
+                    </div>
+                </article>
+
+                <article class="question-item" data-question="9">
+                    <div class="question-title">혼자 하는 활동에 투자하는 시간이 다른 사람에 비해 많다고 생각하나요?</div>
+
+                    <div class="answer-list">
+                        <label class="answer-option">
+                            <input type="radio" name="question-9" value="1" class="answer-radio" data-score="1">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-9" value="2" class="answer-radio" data-score="2">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-9" value="3" class="answer-radio" data-score="3">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">보통이다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-9" value="4" class="answer-radio" data-score="4">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-9" value="5" class="answer-radio" data-score="5">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇다</span>
+                        </label>
+                    </div>
+                </article>
+
+                <article class="question-item" data-question="10">
+                    <div class="question-title">질문 아이디어 고갈 ㅠㅠ</div>
+
+                    <div class="answer-list">
+                        <label class="answer-option">
+                            <input type="radio" name="question-10" value="1" class="answer-radio" data-score="1">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-10" value="2" class="answer-radio" data-score="2">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇지 않다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-10" value="3" class="answer-radio" data-score="3">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">보통이다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-10" value="4" class="answer-radio" data-score="4">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">그렇다</span>
+                        </label>
+
+                        <label class="answer-option">
+                            <input type="radio" name="question-10" value="5" class="answer-radio" data-score="5">
+                            <span class="answer-circle"></span>
+                            <span class="answer-text">아주 그렇다</span>
+                        </label>
+                    </div>
+                </article>
+            </section>
+
+            <button type="button" class="next-question-button" id="next-question-button">
+                다음 질문
+            </button>
+
+            <a href="{% url 'lastpage' %}" class="result-button" id="result-button">
+                레벨 확인하기
+            </a>
+        </div>
+    </section>
+
+    <aside class="test-progress-panel">
+        <div class="test-progress-title">
+            테스트 진행률
+        </div>
+
+        <div class="test-progress-count">
+            <span id="progress-count">1</span> / 10
+        </div>
+
+        <div class="test-progress-bar">
+            <div class="test-progress-fill" id="side-progress-fill"></div>
+        </div>
+
+        <ol class="question-status-list">
+            <li class="question-status question-status--active" data-status="1">질문 1 <span></span></li>
+            <li class="question-status" data-status="2">질문 2 <span></span></li>
+            <li class="question-status" data-status="3">질문 3 <span></span></li>
+            <li class="question-status" data-status="4">질문 4 <span></span></li>
+            <li class="question-status" data-status="5">질문 5 <span></span></li>
+            <li class="question-status" data-status="6">질문 6 <span></span></li>
+            <li class="question-status" data-status="7">질문 7 <span></span></li>
+            <li class="question-status" data-status="8">질문 8 <span></span></li>
+            <li class="question-status" data-status="9">질문 9 <span></span></li>
+            <li class="question-status" data-status="10">질문 10 <span></span></li>
+        </ol>
+    </aside>
+</main>
+
+<script src="{% static 'js/testpage.js' %}"></script>
 {% endblock %}
