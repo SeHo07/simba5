@@ -1,0 +1,14 @@
+:root {
+    /* Background */
+    --bg-main: #FFFBEA;
+    --bg-dark: #FDE047;
+
+    /* Text */
+    --text-brown-dark: #713F12;
+    --text-brown-light: #A16207;
+    --text-green-light: #669600;
+    --text-green-dark: #598300;
+
+    /* Precent */
+    --precent-green: #A5DD2B;
+}
