@@ -1,0 +1,58 @@
+.title-brown{
+    color: var(--text-brown-dark);
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+.subtitle-brown{
+    color: var(--text-brown-light);
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.brown-dark-l{
+color: var(--text-brown-dark);
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.brown-dark-m{
+    color: var(--text-brown-dark);
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.brown-light-s{
+color: var(--text-brown-light);
+font-family: Inter;
+font-size: 11px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.green-dark-s{
+    color: var(--text-green-dark);
+text-align: center;
+font-family: Inter;
+font-size: 11px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.green-dark-ss{
+    color: var(--text-green-dark);
+text-align: center;
+font-family: Inter;
+font-size: 8px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
