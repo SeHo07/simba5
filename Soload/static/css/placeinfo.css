@@ -582,3 +582,8 @@
     font-size: 18px;
     cursor: pointer;
 }
+
+button{
+    border: none;
+    outline: none;
+}

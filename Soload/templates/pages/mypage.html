@@ -61,16 +61,110 @@
                 내 활동 보기
             </button>
 
-            <a href="#" class = "mypage_menu-button">
+            <button type="button" class = "mypage_menu-button" id="saved-place-button">
                 장소 찜<br>
                 목록
-            </a>
+            </button>
 
-            <a href="#" class = "mypage_menu-button">
+            <button type="button" class = "mypage_menu-button" id="review-collection-button">
                 작성 후기<br>
                 모아보기
-            </a>
+            </button>
         </section>
     </section>
+
+
+    <div class="saved-place-modal" id="saved-place-modal">
+        <div class="saved-place-modal-content">
+            <div class="saved-place-modal-title">
+                장소 찜 목록
+            </div>
+
+            <div class="saved-place-card-list">
+                <a href="{% url 'placeinfo' %}" class="saved-place-card">
+                    <span class="saved-place-tag">Lv.3 추천</span>
+                    <div class="saved-place-image">사진</div>
+
+                    <div class="saved-place-body">
+                        <strong>한적한 북카페</strong>
+                        <p>카페 · 서울 마포구</p>
+                    </div>
+                </a>
+
+                <a href="{% url 'placeinfo' %}" class="saved-place-card">
+                    <span class="saved-place-tag">Lv.3 추천</span>
+                    <div class="saved-place-image">사진</div>
+
+                    <div class="saved-place-body">
+                        <strong>한적한 북카페</strong>
+                        <p>카페 · 서울 마포구</p>
+                    </div>
+                </a>
+
+                <a href="{% url 'placeinfo' %}" class="saved-place-card">
+                    <span class="saved-place-tag">Lv.3 추천</span>
+                    <div class="saved-place-image">사진</div>
+
+                    <div class="saved-place-body">
+                        <strong>한적한 북카페</strong>
+                        <p>카페 · 서울 마포구</p>
+                    </div>
+                </a>
+            </div>
+
+            <button type="button" class="saved-place-close-button" id="saved-place-close-button">
+                닫기
+            </button>
+        </div>
+    </div>
+
+
+    <div class="review-collection-modal" id="review-collection-modal">
+        <div class="review-collection-modal-content">
+            <div class="review-collection-modal-title">
+                작성 후기 모아보기
+            </div>
+
+            <div class="review-collection-list">
+                <a href="{% url 'placeinfo' %}" class="review-collection-item">
+                    <span class="review-place-name">
+                        어글리 베이커리 연남점
+                    </span>
+
+                    <span class="review-visit-date">
+                        방문 : 2026.01.01
+                    </span>
+                </a>
+
+                <a href="{% url 'placeinfo' %}" class="review-collection-item">
+                    <span class="review-place-name">
+                        어글리 베이커리 연남점
+                    </span>
+
+                    <span class="review-visit-date">
+                        방문 : 2026.01.01
+                    </span>
+                </a>
+
+                <a href="{% url 'placeinfo' %}" class="review-collection-item">
+                    <span class="review-place-name">
+                        어글리 베이커리 연남점
+                    </span>
+
+                    <span class="review-visit-date">
+                        방문 : 2026.01.01
+                    </span>
+                </a>
+
+            </div>
+
+            <button type="button" class="review-collection-close-button" id="review-collection-close-button">
+                닫기
+            </button>
+        </div>
+    </div>
+
 </main>
+
+<script src="{% static 'js/mypage.js' %}"></script>
 {% endblock %}
