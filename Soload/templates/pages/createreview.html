@@ -11,7 +11,7 @@
     <!-- 장소 DB내용으로 변경 필요-->
     <span class="subtitle-brown"><i class="fa-solid fa-location-dot"></i>  장소 정보:어글리 베이커리 연남점</span>
 </div>
-<form method="post">
+<form method="post" id="review-form">
     {% csrf_token %}
 <div class="review_main">
     <div class="review_write">
@@ -139,7 +139,7 @@
                 <span class="brown-dark-m">(그저 그래요)</span>
             </label>
             <label class="sense_score_box">
-                <input type="radio" name="sense_score" value="2">
+                <input type="radio" name="sense_score" value="3">
                 <span class="brown-dark-m">높음</span>
                 <span class="brown-dark-m">(눈치가 보였어요)</span>
             </label>
@@ -150,69 +150,69 @@
             <span class="brown-dark-l">4. 태그 선택 (최대 4개 선택 가능)</span>
             <span class="brown-light-s">해당 장소를 잘 표현하는 태그를 선택해주세요.</span>
         </div>
-        <div class="tage_box_group" for="tage">
+        <div class="tage_box_group">
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="quite">
+                <input type="checkbox" name="tag" value="quiet">
                 <span class="subtitle-brown">#조용함</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="noise">
+                <input type="checkbox" name="tag" value="noise">
                 <span class="subtitle-brown">#시끄러움</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="good_atmosphere">
+                <input type="checkbox" name="tag" value="good_atmosphere">
                 <span class="subtitle-brown">#분위기좋음</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="clean">
+                <input type="checkbox" name="tag" value="clean">
                 <span class="subtitle-brown">#깔끔함</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="spacious">
+                <input type="checkbox" name="tag" value="spacious">
                 <span class="subtitle-brown">#넓은공간</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="good_for_study">
+                <input type="checkbox" name="tag" value="good_for_study">
                 <span class="subtitle-brown">#혼자공부하기좋음</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="parking_abailable">
+                <input type="checkbox" name="tag" value="parking_available">
                 <span class="subtitle-brown">#주차가능</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="good_view">
+                <input type="checkbox" name="tag" value="good_view">
                 <span class="subtitle-brown">#뷰좋음</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="crowded">
+                <input type="checkbox" name="tag" value="crowded">
                 <span class="subtitle-brown">#사람많음</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="large_tables">
+                <input type="checkbox" name="tag" value="large_tables">
                 <span class="subtitle-brown">#테이블넓음</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="wifi">
+                <input type="checkbox" name="tag" value="wifi">
                 <span class="subtitle-brown">#와이파이빵빵</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="nice_interior">
+                <input type="checkbox" name="tag" value="nice_interior">
                 <span class="subtitle-brown">#인테리어예쁨</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="good_value">
+                <input type="checkbox" name="tag" value="good_value">
                 <span class="subtitle-brown">#가성비좋음</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="pet_friendly">
+                <input type="checkbox" name="tag" value="pet_friendly">
                 <span class="subtitle-brown">#반려동물가능</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="good_for_browsing">
+                <input type="checkbox" name="tag" value="good_for_browsing">
                 <span class="subtitle-brown">#구경하기좋음</span>
             </label>
             <label class="tage_box">
-                <input type="checkbox" id="tage" name="tage" value="many_solo_visitors">
+                <input type="checkbox" name="tag" value="many_solo_visitors">
                 <span class="subtitle-brown">#혼자온사람많음</span>
             </label>
         </div>
@@ -286,7 +286,7 @@
         </div>
         <div class="sole_seat_box_group">
             <label class="sole_seat_box">
-                <input type="radio" name="sole_seat" value="yes"">
+                <input type="radio" name="sole_seat" value="yes">
                 <span class="subtitle-brown">있음</span>
             </label>
             <label class="sole_seat_box">
@@ -316,11 +316,11 @@
         </div>
         <div class="wife_box_group">
             <label class="wife_box">
-                <input type="radio" name="wife" value="yse">
+                <input type="radio" name="wifi" value="yes">
                 <span class="subtitle-brown">있음</span>
             </label>
             <label class="wife_box">
-                <input type="radio" name="wife" value="no">
+                <input type="radio" name="wifi" value="no">
                 <span class="subtitle-brown">없음</span>
             </label>
         </div>
@@ -348,13 +348,21 @@
             <span class="brown-dark-l">11. 한줄 후기 작성</span>
             <span class="brown-light-s">이 장소를 한 줄로 표현한다면?</span>
         </div>
-        <textarea class="real_review" placeholder="예) 조용하고 집중이 잘 되는 카페였어요!"></textarea>
+        <textarea name="review" class="real_review" placeholder="예) 조용하고 집중이 잘 되는 카페였어요!"></textarea>
     </div>
 </div>
 <div class="review_button">
-    <button type="button">임시저장</button>
-    <button type="submit">저장하기</button>
+    <button type="button" id="draft-button">임시저장</button>
+    <button type="submit" id="save-button">저장하기</button>
 </div>
 </form>
 </div>
+<div class="save-popup" id="save-popup">
+    <div>
+        <a href="{% url 'mapage' %}">마이페이지로 이동하기</a>
+        <a href="{% url 'main' %}">메인페이지로 이동하기</a>
+    </div>
+
+</div>
+<script src="{% static 'js/createreview.js' %}"></script>
 {% endblock %}
