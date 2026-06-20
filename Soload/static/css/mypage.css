@@ -10,11 +10,17 @@
 
 
 }
+.mypage_activity-section{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
 .mypage_profile-section {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    border-radius: 25px;
 }
 
 .mypage_character-card {
@@ -22,7 +28,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    border-radius: 25px;
     background: var(--light, #FFFBEA);
 
 }
@@ -37,30 +43,18 @@
 .mypage_level-info{
     display: flex;
     flex-direction: column;
+    gap: 6px;
+    padding-top: 10px;
 }
 
 .mypage_level-title{
-    color: var(--darker, #713F12);
-
-    font-size: 32px;
     font-weight: 700;
-
-    margin-bottom: 12px;
-}
-
-.mypage_level-discription{
-    color: var(--darker, #713F12);
-    font-size: 16px;
-    margin-bottom: 20px;
 }
 
 .mypage_exp-text{
-    color: var(--darker, #713F12);
-
-    font-size: 18px;
     font-weight: 500;
-
-    margin-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .mypage_progress{
@@ -81,13 +75,13 @@
     border-radius: 999px;
 }
 
-.mypage_activity-button {
-    color: var(--darker, #713F12);
-}
-
 .growth-section{
     padding: 32px;
     background-color: var(--light, #FFFBEA);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 25px;
 }
 
 .growth-section_title{
@@ -101,7 +95,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    gap: 50px;
     margin-bottom: 32px;
 }
 
@@ -126,14 +120,26 @@
 }
 
 .mypage_menu-section{
-    display: grid;
-    grid-template-columns: 1fr 180px 180px;
-    gap: 24px;
-    height: 180px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 350px;
+    height: 110px;
     background-color: var(--light, #FFFBEA);
     padding: 32px;
+    border-radius: 25px;
 }
-
+.activity_content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.activity_button-group{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
 .mypage_activity-button{
     border: none;
     background: transparent;
@@ -154,14 +160,18 @@
     background-color: white;
 
     color: var(--darker, #713F12);
-
-    font-size: 28px;
-    font-weight: 600;
+    border: 1px solid var(--normal, #FDE047);
+    border-radius: 25px;
+    width: 150px;
+    height: 100px;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .mypage_menu-button:hover{
-    background-color: #f3f3f3;
+    background-color: var(--bg-main);
 }
+
 
 .saved-place-modal {
     position: fixed;

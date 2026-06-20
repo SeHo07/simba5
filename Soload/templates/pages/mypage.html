@@ -12,17 +12,17 @@
         </div>
 
         <div class = "mypage_level-info">
-            <span class = "mypage_level-title">
+            <span class = "mypage_level-title brown-dark-xl">
                 나의 레벨 : {{ user_profile.level_name}} (LV.{{ user_profile.lever }})
             </span>
 
-            <p class = "mypage_level-discription">
+            <span class = "mypage_level-discription brown-light-m">
                 후기를 작성하고 레벨을 올려보세요!
-            </p>
+            </span>
 
-            <div class = "mypage_exp-text">
+            <span class = "mypage_exp-text brown-light-l">
                 다음 레벨까지 {{ user_profile.current_exp }} / {{ user_profile.required_exp}} EXP
-            </div>
+            </span>
 
             <div class = "mypage_progress">
                 <div class = "mypage_progress-fill"></div>
@@ -51,25 +51,27 @@
                 </div>
             </div>
 
-            <div class = "growth-section_description">
+            <div class = "brown-light-l">
                 레벨을 올리고 새로운 병아리를 만나보세요!
             </div>
         </section>
 
         <section class = "mypage_menu-section">
-            <button type="button" class="mypage_activity-button">
-                내 활동 보기
-            </button>
+            <div class="activity_content">
+                <span class="title-brown">내 활동 보기</span>
+            </div>
 
-            <button type="button" class = "mypage_menu-button" id="saved-place-button">
-                장소 찜<br>
-                목록
-            </button>
+            <div class="activity_button-group">
+                <button type="button" class = "mypage_menu-button" id="saved-place-button">
+                    장소 찜<br>
+                    목록
+                </button>
 
-            <button type="button" class = "mypage_menu-button" id="review-collection-button">
-                작성 후기<br>
-                모아보기
-            </button>
+                <button type="button" class = "mypage_menu-button" id="review-collection-button">
+                    작성 후기<br>
+                    모아보기
+                </button>
+            </div>
         </section>
     </section>
 
