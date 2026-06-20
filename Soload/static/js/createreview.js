@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     const reviewForm = document.querySelector("#review-form");
+    const savePopup = document.querySelector("#save-popup");
 
     reviewForm.addEventListener("submit", function (event) {
         const requiredGroups = [
@@ -52,5 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
             alert("한 줄 후기를 작성해주세요.");
         }
+
+        event.preventDefault();
+        savePopup.classList.add("open");
     });
 });

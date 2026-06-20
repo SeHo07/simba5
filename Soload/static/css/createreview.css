@@ -284,3 +284,94 @@ textarea.real_review:focus{
 .wife_box:active {
     transform: scale(0.97);
 }
+.save-popup{
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    background-color: rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+}
+.popup-main{
+    width: 600px;
+    height: 500px;
+    background-color: var(--bg-main);
+    border-radius: 20px;
+
+    gap: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.popup-image{
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+.save-popup-content{
+    color: var(--g-darker, #598300);
+text-align: center;
+font-family: Inter;
+font-size: 40px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.popup-button-group{
+    display: flex;
+    gap: 40px;
+}
+.popup-button-group a{
+    text-decoration-line: none;
+}
+.popup-button {
+    background-color: #fff;
+
+}
+.popup-button{
+    display: inline-flex;
+    background-color: #fff;
+    width: 180px;
+    height: 65px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    text-align: center;
+}
+.save-popup.open {
+    display: flex;
+}
+.save-popup.open {
+    display: flex;
+    animation: overlay-fade-in 0.2s ease-out;
+}
+
+.save-popup.open .popup-main {
+    animation: popup-show 0.3s ease-out;
+}
+
+@keyframes overlay-fade-in {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+}
+
+@keyframes popup-show {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

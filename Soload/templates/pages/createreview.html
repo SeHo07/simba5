@@ -358,11 +358,15 @@
 </form>
 </div>
 <div class="save-popup" id="save-popup">
-    <div>
-        <a href="{% url 'mypage' %}">마이페이지로 이동하기</a>
-        <a href="{% url 'main' %}">메인페이지로 이동하기</a>
-    </div>
 
+    <div class="popup-main">
+        <img class="popup-image" src="{% static 'images/chick-stage-3.png' %}">
+        <span class="save-popup-content">저장되었습니다.</span>
+        <div class="popup-button-group">
+            <a href="{% url 'mypage' %}" class="popup-button brown-light-l">마이페이지로</br>이동하기</a>
+            <a href="{% url 'main' %}" class="popup-button brown-light-l">메인페이지로</br>이동하기</a>
+        </div>
+    </div>
 </div>
 <script src="{% static 'js/createreview.js' %}"></script>
 {% endblock %}
