@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from .models import Profile, Place
 # Create your views here.
 def main(request):
+    if not request.user.is_authenticated: 
+        return redirect('start')
     level = request.user.profile.level
     places = Place.objects.filter(recommended_level=level)
     return render(request, 'pages/main.html', {
