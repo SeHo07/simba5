@@ -8,12 +8,31 @@ from django.db.models import Avg, Count
 def main(request):
     if not request.user.is_authenticated: 
         return redirect('start')
-    level = request.user.profile.level
+
+    user_profile = request.user.profile
+    level = user_profile.level
     places = Place.objects.filter(recommended_level=level)
+
+    places_data = []
+
+    for place in places:
+        if place.latitude is None or place.longitude is None:
+            continue
+
+        places_data.append({
+            "id": place.id,
+            "name": place.name,
+            "lat": float(place.latitude),
+            "lng": float(place.longitude),
+            "recommended_level": place.recommended_level,
+        })
+
     return render(request, 'pages/main.html', {
+        'user_profile': user_profile,
         'places': places,
+        'places_data': places_data,
         'active_nav': 'main'
-    })
+    }) 
 
 def login(request):
     if request.method == 'POST':
@@ -92,10 +111,10 @@ def createreview(request, place_id):
             nunchi_score=int(request.POST.get('nunchi_score', 1)),
             rating = float(request.POST.get('rating', 5)),
             recommended_level = int(request.POST.get('recommended_level', 1)),
-            has_kiosk=request.POST.get('has_kiosk') == 'on',
-            has_single_seat=request.POST.get('has_single_seat') == 'on',
-            has_con=request.POST.get('has_con') == 'on',
-            has_wifi=request.POST.get('has_wifi') == 'on',
+            has_kiosk=request.POST.get('has_kiosk') == 'yes',
+            has_single_seat=request.POST.get('has_single_seat') == 'yes',
+            has_con=request.POST.get('has_con') == 'yes',
+            has_wifi=request.POST.get('has_wifi') == 'yes',
             content=request.POST.get('content'),
         )
         for tid in request.POST.getlist('tags'):
@@ -124,10 +143,10 @@ def createreview(request, place_id):
         )
 
 def review_delete(request, review_id):
-    review = get_object_or_404(Review, pk=review.id)
+    review = get_object_or_404(Review, pk=review_id)
     if review.writer != request.user:
         return redirect('main')
-    review.delete
+    review.delete()
     return redirect('mypage')
 
 def mypage(request):
@@ -169,9 +188,30 @@ def score_to_level(score):
 def place_like(request, place_id):
     if not request.user.is_authenticated:
         return redirect('start')
+    place = get_object_or_404(Place, pk=place_id)
     like, created = PlaceLike.objects.get_or_create(user=request.user, place=place)
     if not created:
         like.delete()
     return redirect('placeinfo', place_id=place.id)
 
 
+def create_place(request):
+    if not request.user.is_authenticated:
+        return redirect('start')
+    if request.method == 'POST':
+        lat = request.POST.get('latitude')
+        lng = request.POST.get('longitude')
+        place, created = Place.objects.get_or_create(
+            kakao_id = request.POST.get('kakao_id'),
+            defaults={
+                'name': request.POST.get('name', ''),
+                'address': request.POST.get('address', ''),
+                'category': request.POST.get('category', ''),
+                'tel': request.POST.get('phone', ''),
+                'latitude': float(lat) if lat else None,
+                'longitude': float(lng) if lng else None,
+            }
+
+        )
+        return redirect('placeinfo', place_id=place.id)
+    return redirect('main')

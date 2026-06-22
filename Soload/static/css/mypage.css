@@ -68,7 +68,6 @@
 }
 
 .mypage_progress-fill{
-    width: 40%;
     height: 100%;
     background-color: var(--g-normal, #A5DD2B);
 
@@ -265,7 +264,11 @@
     font-size: 22px;
     font-weight: 500;
 }
-
+.saved-place-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 .saved-place-body{
     padding: 14px 12px;
 }

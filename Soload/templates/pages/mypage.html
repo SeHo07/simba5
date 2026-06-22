@@ -21,11 +21,13 @@
             </span>
 
             <span class = "mypage_exp-text brown-light-l">
-                다음 레벨까지 {{ user_profile.current_exp }} / {{ user_profile.required_exp}} EXP
+                다음 레벨까지 {{ user_profile.exp }} / {{ user_profile.required_exp}} EXP
             </span>
+            {% widthratio user_profile.exp user_profile.required_exp 100 as exp_percent %}
 
-            <div class = "mypage_progress">
-                <div class = "mypage_progress-fill"></div>
+            <div class="mypage_progress">
+                <div class="mypage_progress-fill" style="width: {% if user_profile.level >= 5 %}100{% else %}{{ exp_percent }}{% endif %}%;">
+                </div>
             </div>
         </div>
     </section>
@@ -83,35 +85,27 @@
             </div>
 
             <div class="saved-place-card-list">
-                <a href="{% url 'placeinfo' 1 %}" class="saved-place-card">
-                    <span class="saved-place-tag">Lv.3 추천</span>
-                    <div class="saved-place-image">사진</div>
+                {% for like in likes %}
+                    <a href="{% url 'placeinfo' like.place.id %}" class="saved-place-card">
+                        <span class="saved-place-tag">Lv.{{ like.place.recommended_level }} 추천</span>
+                        
+                        <div class="saved-place-image">
+                            {% if like.place.images %}
+                            <img src="{{ like.place.images.url }}"
+                                alt="{{ like.place.name }}">
+                            {% else %}
+                                <p class="brown-light-l">사진 없음</p>
+                            {% endif %}
+                        </div>
 
-                    <div class="saved-place-body">
-                        <strong>한적한 북카페</strong>
-                        <p>카페 · 서울 마포구</p>
-                    </div>
-                </a>
-
-                <a href="{% url 'placeinfo' 1 %}" class="saved-place-card">
-                    <span class="saved-place-tag">Lv.3 추천</span>
-                    <div class="saved-place-image">사진</div>
-
-                    <div class="saved-place-body">
-                        <strong>한적한 북카페</strong>
-                        <p>카페 · 서울 마포구</p>
-                    </div>
-                </a>
-
-                <a href="{% url 'placeinfo' 1 %}" class="saved-place-card">
-                    <span class="saved-place-tag">Lv.3 추천</span>
-                    <div class="saved-place-image">사진</div>
-
-                    <div class="saved-place-body">
-                        <strong>한적한 북카페</strong>
-                        <p>카페 · 서울 마포구</p>
-                    </div>
-                </a>
+                        <div class="saved-place-body">
+                            <strong class="brown-light-l">{{ like.place.name }}</strong>
+                            <p>{{ like.place.category }} · {{ like.place.address }}</p>
+                        </div>
+                    </a>
+                {% empty %}
+                    <p class="brown-light-l">찜한 장소가 없습니다.</p>
+                {% endfor %}
             </div>
 
             <button type="button" class="saved-place-close-button" id="saved-place-close-button">
@@ -128,36 +122,19 @@
             </div>
 
             <div class="review-collection-list">
-                <a href="{% url 'placeinfo' 1 %}" class="review-collection-item">
+                {% for review in my_reviews %}
+                    <a href="{% url 'placeinfo' review.place.id %}" class="review-collection-item">
                     <span class="review-place-name">
-                        어글리 베이커리 연남점
+                        {{ review.place.name }}
                     </span>
 
                     <span class="review-visit-date">
-                        방문 : 2026.01.01
+                        작성일 : {{ review.created_at|date:"Y.m.d" }}
                     </span>
                 </a>
-
-                <a href="{% url 'placeinfo' 1 %}" class="review-collection-item">
-                    <span class="review-place-name">
-                        어글리 베이커리 연남점
-                    </span>
-
-                    <span class="review-visit-date">
-                        방문 : 2026.01.01
-                    </span>
-                </a>
-
-                <a href="{% url 'placeinfo' 1 %}" class="review-collection-item">
-                    <span class="review-place-name">
-                        어글리 베이커리 연남점
-                    </span>
-
-                    <span class="review-visit-date">
-                        방문 : 2026.01.01
-                    </span>
-                </a>
-
+                {% empty %}
+                    <p class="brown-light-l">작성한 후기가 없습니다.</p>
+                {% endfor %}
             </div>
 
             <button type="button" class="review-collection-close-button" id="review-collection-close-button">

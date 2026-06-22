@@ -19,11 +19,11 @@
             <p>후기를 작성하고 레벨을 올려보세요!</p>
 
             <div class="level-section_exp-text">
-                다음 레벨까지 {{ user_profile.current_exp }} / {{ user_profile.required_exp }} EXP
+                다음 레벨까지 {{ user_profile.exp }} / {{ user_profile.required_exp }} EXP
             </div>
 
             <div class="level-section_progress">
-                <div class="level-section_progress-fill"></div>
+                <div class="level-section_progress-fill" style="width: {% if user_profile.level >= 5 %}100{% else %}{% widthratio user_profile.exp user_profile.required_exp 100 %}{% endif %}%;"></div>
             </div>
         </div>
     </section>
@@ -37,14 +37,14 @@
                 <span class="place-card_tag">{{ place.recommended_level }} 추천</span>
 
                 <div class="place-card_image">
-                    {% if place.image %}
-                    <img src="{{ place.image.url }}" alt="{{ place.name }}">
+                    {% if place.images %}
+                    <img src="{{ place.images.url }}" alt="{{ place.name }}">
                     {% endif %}
                 </div>
 
                 <div class="place-card_body">
                     <span class="place-name">{{ place.name }}</span>
-                    <p>{{ place.location }}</p>
+                    <p>{{ place.address }}</p>
                     <button type="button" class="place-card_like">♡</button>
                 </div>
             </a>
@@ -56,15 +56,19 @@
 
     <section class="map-section">
         <div class="map-section_search">
-            <input type="text" placeholder="장소를 입력하세요">
-            <button type="button">🔍</button>
+            <input type="text" id="place-search-input" placeholder="장소를 입력하세요">
+            <button type="button" id="place-search-button">🔍</button>
         </div>
+
+        <div class="search-result-list" id="search-result-list"></div>
 
         <div class="map-section_map" id="map"></div>
     </section>
 
+    {{ places_data|json_script:"places-data" }}
+
 </main>
 
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0eb280ffaedbceff3e438e6a20bc4fc3"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0eb280ffaedbceff3e438e6a20bc4fc3&libraries=services"></script>
 <script src="{% static 'js/main-map.js' %}"></script>
 {% endblock %}
