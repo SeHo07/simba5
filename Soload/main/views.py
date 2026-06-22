@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from .models import Profile, Place, Tag, VisitTime, Purpose, Review,PlaceLike
 from django.db.models import Avg, Count
 
+
 # Create your views
 def main(request):
     if not request.user.is_authenticated: 
@@ -215,5 +216,5 @@ def create_place(request):
             }
 
         )
-        return redirect('placeinfo', place_id=place.id)
+        return redirect('createreview', place_id=place.id)
     return redirect('main')
