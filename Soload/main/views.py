@@ -84,6 +84,8 @@ def logout(request):
 def placeinfo(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     reviews = place.reviews.all()
+    if request.user.is_authenticated and request.GET.get('same_level'):
+        reviews = reviews.filter(writer__profile__level=request.user.profile.level)
     avg_rating = place.reviews.aggregate(avg_rating=Avg("rating"))["avg_rating"]
     top_tags = Tag.objects.filter(reviews__place = place).annotate(
         review_count=Count("reviews")).order_by("-review_count")[:3]
@@ -93,13 +95,13 @@ def placeinfo(request, place_id):
     return render(request, 'pages/placeinfo.html', {
         'place': place,
         'reviews': reviews,
-        'review_count': reviews.count(),
+        'review_count': place.reviews.count(),
         'avg_rating': avg_rating,
         'top_tags': top_tags,
         'top_visit_times': top_visit_times,
-        'nunchi_low': reviews.filter(nunchi_score=1).count(),
-        'nunchi_mid': reviews.filter(nunchi_score=2).count(),
-        'nunchi_high': reviews.filter(nunchi_score=3).count(),
+        'nunchi_low': place.reviews.filter(nunchi_score=1).count(),
+        'nunchi_mid': place.reviews.filter(nunchi_score=2).count(),
+        'nunchi_high': place.reviews.filter(nunchi_score=3).count(),
         })
 
 def createreview(request, place_id):
