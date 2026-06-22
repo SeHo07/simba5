@@ -44,7 +44,11 @@
     justify-content: center;
     align-items: center;
 }
-
+.place-photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 .place-photo-text {
     color: #111;
     font-size: 36px;
