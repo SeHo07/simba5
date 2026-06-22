@@ -19,7 +19,7 @@
             <p>후기를 작성하고 레벨을 올려보세요!</p>
 
             <div class="level-section_exp-text">
-                다음 레벨까지 {{ user_profile.current_exp }} / {{ user_profile.required_exp }} EXP
+                다음 레벨까지 {{ user_profile.exp }} / {{ user_profile.required_exp }} EXP
             </div>
 
             <div class="level-section_progress">
@@ -37,14 +37,14 @@
                 <span class="place-card_tag">{{ place.recommended_level }} 추천</span>
 
                 <div class="place-card_image">
-                    {% if place.image %}
-                    <img src="{{ place.image.url }}" alt="{{ place.name }}">
+                    {% if place.images %}
+                    <img src="{{ place.images.url }}" alt="{{ place.name }}">
                     {% endif %}
                 </div>
 
                 <div class="place-card_body">
                     <span class="place-name">{{ place.name }}</span>
-                    <p>{{ place.location }}</p>
+                    <p>{{ place.address }}</p>
                     <button type="button" class="place-card_like">♡</button>
                 </div>
             </a>

@@ -9,7 +9,7 @@
     <span class="subtitle-brown">다른 혼놀러들을 위해 솔직한 후기를 남겨주세요!</span>
     
     <!-- 장소 DB내용으로 변경 필요-->
-    <span class="subtitle-brown"><i class="fa-solid fa-location-dot"></i>  장소 정보:어글리 베이커리 연남점</span>
+    <span class="subtitle-brown"><i class="fa-solid fa-location-dot"></i>  장소 정보: {{ place.name }}</span>
 </div>
 <form method="post" id="review-form">
     {% csrf_token %}
