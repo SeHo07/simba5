@@ -55,6 +55,13 @@ class Place(models.Model):
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     kakao_id = models.CharField(max_length=50, blank=True)
+
+    def thumbnail(self):
+        first = self.images.first()
+        if first:
+            return first.image.url
+        return None
+
     def __str__(self):
         return self.name
 
