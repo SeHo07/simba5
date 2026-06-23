@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from .models import Profile, Place, Tag, VisitTime, Purpose, Review,PlaceLike
 from django.db.models import Avg, Count
+from django.http import JsonResponse
 
 
 # Create your views
@@ -27,7 +28,6 @@ def main(request):
             "lng": float(place.longitude),
             "recommended_level": place.recommended_level,
             "avg_rating": place.reviews.aggregate(a=Avg("rating"))["a"] or 0,
-            "avg_nunchi": place.reviews.aggregate(a=Avg("nunchi_score"))["a"] or 0,
             "review_count": place.reviews.count(),
         })
 
@@ -212,19 +212,22 @@ def create_place(request):
     if not request.user.is_authenticated:
         return redirect('start')
     if request.method == 'POST':
-        lat = request.POST.get('latitude')
-        lng = request.POST.get('longitude')
-        place, created = Place.objects.get_or_create(
-            kakao_id = request.POST.get('kakao_id'),
-            defaults={
-                'name': request.POST.get('name', ''),
-                'address': request.POST.get('address', ''),
-                'category': request.POST.get('category', ''),
-                'tel': request.POST.get('phone', ''),
-                'latitude': float(lat) if lat else None,
-                'longitude': float(lng) if lng else None,
-            }
+        kakao_id = request.POST.get('kakao_id')
+        place = Place.objects.filter(kakao_id=kakao_id).first()
+        if place:
+            return redirect('placeinfo', place_id=place.id)
+        if request.POST.get('confirm') == 'yes':
+            lat = request.POST.get('latitude')
+            lng = request.POST.get('longitude')
+            place = Place.objects.create(
+                kakao_id = kakao_id,
+                name = request.POST.get('name', ''),
+                address = request.POST.get('address', ''),
+                category = request.POST.get('category', ''),
+                tel = request.POST.get('phone', ''),
+                latitude = float(lat) if lat else None,
+                longitude = float(lng) if lng else None,
 
-        )
-        return redirect('createreview', place_id=place.id)
+            )
+        return redirect('placeinfo', place_id=place.id)
     return redirect('main')
