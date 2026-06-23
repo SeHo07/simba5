@@ -393,7 +393,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderHelpContent() {
         const rawCategory = helpDataElement.dataset.category;
-        const rawLevel = helpDataElement.dataset.level;
+        const rawLevel = helpDataElement.dataset.userLevel;
 
         const categoryKey = getCategoryKey(rawCategory);
         const level = getLevel(rawLevel);
