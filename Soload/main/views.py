@@ -51,7 +51,7 @@ def main(request):
         'active_nav': 'main',
         'category': category,
         'level': level,
-        'liked_place_ids': liked_place_ids,
+        'liked_place_ids': liked_place_ids
     }) 
 
 def login(request):
@@ -76,24 +76,47 @@ def login(request):
 
 def signup(request):
     if request.method == 'POST':
-        if request.POST['password'] == request.POST['confirm']:
-            
-            user = User.objects.create_user(
-                email = request.POST['email'],
-                username = request.POST['username'],
-                password = request.POST['password'],
-            )
+        email = request.POST.get('email', ''),
+        username = request.POST('username', ''),
+        password = request.POST('password', ''),
+        confirm = request.POST('confirm', ''),
 
-            profile = user.profile
-            profile.nickname = request.POST['username']
-            profile.save()
-            
-            auth_login(request, user)
-
-            return redirect('testpage')
+        special_chars = "!@#$%^&*()_+-=[]{};:,.<>?/|~`"
+        
+        if User.objects.filter(username=username).exists():
+            error = '이미 사용 중인 아이디입니다.'
+        elif len(password) < 8:
+            error = '비밀번호는 8자 이상이어야 합니다.'
+        elif not any(c.isdigit() for c in password):
+            error = '비밀번호에 숫자를 포함해주세요.'
+        elif not any(c in special_chars for c in password):
+            error = '비밀번호에 특수문자(!@#$ 등)를 포함해주세요.'
+        elif password != confirm:
+            error = '비밀번호가 일치하지 않습니다.'
         else:
-            return render(request, 'pages/signup.html', {'error': '비밀번호가 일치하지 않습니다.'})
-    
+            error = None
+
+        if error:
+            return render(request, 'pages/signup.html', {
+                'error': error,
+                'email': email,
+                'username': username,
+            })
+        
+        user = User.objects.create_user(
+            email = email,
+            username = username,
+            password = password,
+        )
+
+        profile = user.profile
+        profile.nickname = username
+        profile.save()
+            
+        auth_login(request, user)
+
+        return redirect('testpage')
+        
     return render(request, 'pages/signup.html')
 
 def logout(request):
