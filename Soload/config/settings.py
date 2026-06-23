@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,6 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-26bdjzc)%y&y1w14)&##p_@&@)aj(ftz7u5(fo3gj(qmnf*j_)'
+
+KAKAO_APP_KEY = os.environ.get('KAKAO_APP_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
