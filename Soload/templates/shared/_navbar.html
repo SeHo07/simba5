@@ -14,4 +14,23 @@
         </a>
         <a href="{% url 'logout' %}" class="navbar__link">로그아웃</a>
     </nav>
+    <nav class="nav-media-group">
+        <button type="button" class="navbar-toggle" id="navbar-toggle">
+            ☰
+        </button>
+
+        <div class="nav-media-tag" id="nav-media-tag">
+            <a href="{% url 'main' %}">홈</a>
+            <a href="{% url 'mypage' %}">마이페이지</a>
+            <a href="{% url 'logout' %}">로그아웃</a>
+        </div>
+    </nav>
 </header>
+<script>
+    const navbarToggle = document.getElementById("navbar-toggle");
+    const navMediaTag = document.getElementById("nav-media-tag");
+
+    navbarToggle.addEventListener("click", function () {
+        navMediaTag.classList.toggle("active");
+    });
+</script>
