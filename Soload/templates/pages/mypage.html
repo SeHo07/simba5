@@ -8,11 +8,7 @@
 <main class = "mypage">
     <section class = "mypage_profile-section">
         <div class = "mypage_character-card">
-            {% if user_profile.profile_image %}
-                <img src="{{ user_profile.profile_image.url }}" alt="{{ user_profile.level_name}}" class="mypage_character-image">
-            {% else %}
-                <img src="{{ user_profile.character_image }}" alt="{{ user_profile.level_name}}" class="mypage_character-image">
-            {% endif %}
+            <img src="{{ user_profile.display_image }}" alt="{{ user_profile.level_name}}" class="mypage_character-image">
         </div>
 
         <div class = "mypage_level-info">
@@ -249,22 +245,19 @@
                 <p class="profile-edit-error">{{ profile_error }}</p>
             {% endif %}
 
-            <form method="post" action="{% url 'edit_profile' %}" class="profile-edit-form" enctype="multipart/form-data">
+            <form method="post" class="profile-edit-form" enctype="multipart/form-data">
                 {% csrf_token %}
+                <input type="hidden" name="form_type" value="profile_edit">
 
                 <div class="profile-edit-card">
                     <div class="profile-edit-photo-area">
                         <div class="profile-edit-photo-preview">
-                            {% if user_profile.profile_image %}
-                                <img src="{{ user_profile.profile_image.url }}" alt="프로필사진">
-                            {% else %}
-                                <img src="{{ user_profile.character_image }}" alt="프로필사진">
-                            {% endif %}
+                            <img src="{{ user_profile.display_image }}" alt="프로필사진">
                         </div>
 
                         <label class="profile-edit-file-button">
                             프로필사진
-                            <input type="file" name="profile_image" accept="image/*">
+                            <input type="file" name="image" accept="image/*">
                         </label>
                     </div>
 
