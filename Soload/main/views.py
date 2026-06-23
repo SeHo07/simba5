@@ -217,12 +217,28 @@ def mypage(request):
     if not request.user.is_authenticated:
         return redirect('start')
 
+    profile_error = None
+
+    if request.method == 'POST' and request.POST.get('form_type') == 'profile_edit':
+        nickname = request.POST.get('nickname', '').strip()
+
+        profile = request.user.profile
+        profile.nickname = nickname
+
+        if request.FILES.get('image'):
+            profile.profile_image = request.FILES['image']
+
+        profile.save()
+
+        return redirect('mypage')
+
     likes = PlaceLike.objects.filter(user=request.user)
     my_reviews = Review.objects.filter(writer=request.user)
     return render(request, 'pages/mypage.html', {
         'likes': likes,
         'my_reviews': my_reviews,
         'active_nav': 'mypage',
+        'profile_error': profile_error,
     })
 
 def start(request):

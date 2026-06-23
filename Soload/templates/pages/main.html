@@ -10,7 +10,11 @@
 
     <a href="{% url 'mypage' %}" class="level-section">
         <div class="level-section-badge">
-            <img src="{{ user_profile.character_image }}" alt="{{ user_profile.level_name}}" class="mainpage_character-image">
+            {% if user_profile.profile_image %}
+                <img src="{{ user_profile.profile_image.url }}" alt="{{ user_profile.level_name}}" class="mainpage_character-image">
+            {% else %}
+                <img src="{{ user_profile.character_image }}" alt="{{ user_profile.level_name}}" class="mainpage_character-image">
+            {% endif %}
         </div>
 
         <div class="level-section_info">

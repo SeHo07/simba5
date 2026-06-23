@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("main", "0014_profile_image"),
+        ("main", "0015_profile_profile_image"),
         ("main", "0016_review_likes"),
     ]
 

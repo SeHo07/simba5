@@ -8,13 +8,33 @@
 <main class = "mypage">
     <section class = "mypage_profile-section">
         <div class = "mypage_character-card">
-            <img src="{{ user_profile.display_image }}" alt="{{ user_profile.level_name}}" class="mypage_character-image">
+            {% if user_profile.profile_image %}
+                <img src="{{ user_profile.profile_image.url }}" alt="{{ user_profile.level_name}}" class="mypage_character-image">
+            {% else %}
+                <img src="{{ user_profile.character_image }}" alt="{{ user_profile.level_name}}" class="mypage_character-image">
+            {% endif %}
         </div>
 
         <div class = "mypage_level-info">
-            <span class = "mypage_level-title brown-dark-xl">
-                {{ profile_user.profile.nickname|default:profile_user.username }}님의 레벨 : {{ user_profile.level_name}} (LV.{{ user_profile.level }})
-            </span>
+            <div class="user-profile-title-row">
+                <span class = "mypage_level-title brown-dark-xl">
+                    {{ profile_user.profile.nickname|default:profile_user.username }}
+                </span>
+
+                {% if request.user != profile_user %}
+                    <div class="follow-btn">
+                        <a href="{% url 'follow' profile_user.id %}">
+                            <button type="button">
+                                {% if request.user.profile in user_profile.followers.all %}
+                                    언팔로우
+                                {% else %}
+                                    팔로우
+                                {% endif %}
+                            </button>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
 
             <span class = "mypage_level-discription brown-light-m">
                 이 유저가 쌓아온 혼놀 성장 기록이에요.
@@ -29,12 +49,23 @@
                 <div class="mypage_progress-fill" style="width: {% if user_profile.level >= 5 %}100{% else %}{{ exp_percent }}{% endif %}%;">
                 </div>
             </div>
+
+            <div class="follow-stats">
+                <span class="follow-stat-item" id="follower-button" role="button" tabindex="0">
+                    <strong>{{ user_profile.followers.count }}</strong>
+                    <span>팔로워</span>
+                </span>
+                <span class="follow-stat-item" id="following-button" role="button" tabindex="0">
+                    <strong>{{ user_profile.followings.count }}</strong>
+                    <span>팔로잉</span>
+                </span>
+            </div>
         </div>
     </section>
 
     <section class = "mypage_activity-section">
         <section class = "growth-section">
-            <div class = "growth-section_title">병아리 성장단계</div>
+            <div class = "growth-section_title">병아리 성장단계 : {{ user_profile.level_name}} (LV.{{ user_profile.level }})</div>
             <div class = "growth-stage-list">
                 <div class="growth-stage {% if user_profile.level == 1 %}growth-stage--active{% endif %}">
                     <img src="{% static 'images/chick-stage-1.png' %}" alt="1단계 병아리">
@@ -68,11 +99,6 @@
             </div>
 
             <div class="activity_button-group">
-                <button type="button" class = "mypage_menu-button" id="saved-place-button">
-                    찜한 장소<br>
-                    목록
-                </button>
-
                 <button type="button" class = "mypage_menu-button" id="review-collection-button">
                     작성 후기<br>
                     모아보기
@@ -80,43 +106,6 @@
             </div>
         </section>
     </section>
-
-
-    <div class="saved-place-modal" id="saved-place-modal">
-        <div class="saved-place-modal-content">
-            <div class="saved-place-modal-title">
-                {{ profile_user.profile.nickname|default:profile_user.username }}님의 찜한 장소
-            </div>
-
-            <div class="saved-place-card-list">
-                {% for like in likes %}
-                    <a href="{% url 'placeinfo' like.place.id %}" class="saved-place-card">
-                        <span class="saved-place-tag">Lv.{{ like.place.recommended_level }} 추천</span>
-                        
-                        <div class="saved-place-image">
-                            {% if like.place.thumbnail %}
-                                <img src="{{ like.place.thumbnail }}" alt="{{ like.place.name }}">
-                            {% else %}
-                                <p class="brown-light-l">사진 없음</p>
-                            {% endif %}
-                        </div>
-
-                        <div class="saved-place-body">
-                            <strong class="brown-light-l">{{ like.place.name }}</strong>
-                            <p>{{ like.place.category }} · {{ like.place.address }}</p>
-                        </div>
-                    </a>
-                {% empty %}
-                    <p class="brown-light-l">찜한 장소가 없습니다.</p>
-                {% endfor %}
-            </div>
-
-            <button type="button" class="saved-place-close-button" id="saved-place-close-button">
-                닫기
-            </button>
-        </div>
-    </div>
-
 
     <div class="review-collection-modal" id="review-collection-modal">
         <div class="review-collection-modal-content">
@@ -126,15 +115,72 @@
 
             <div class="review-collection-list">
                 {% for review in my_reviews %}
-                    <a href="{% url 'placeinfo' review.place.id %}" class="review-collection-item">
-                    <span class="review-place-name">
-                        {{ review.place.name }}
-                    </span>
+                    <div class="review-collection-item">
+                        <button type="button" class="review-collection-link review-detail-open-button">
+                            <span class="review-place-name">
+                                {{ review.place.name }}
+                            </span>
 
-                    <span class="review-visit-date">
-                        작성일 : {{ review.created_at|date:"Y.m.d" }}
-                    </span>
-                </a>
+                            <span class="review-visit-date">
+                                작성일 : {{ review.created_at|date:"Y.m.d" }}
+                            </span>
+
+                            <span class="review-text">{{ review.content }}</span>
+
+                            <span class="review-meta">
+                                {% for tag in review.tags.all %}
+                                    #{{ tag.name }}
+                                {% empty %}
+                                    태그 없음
+                                {% endfor %}
+                            </span>
+
+                            <span class="review-detail-data">
+                                <dl class="review-detail-list">
+                                    <div>
+                                        <dt>방문 시간대</dt>
+                                        <dd>{% for visit_time in review.visit_times.all %}{{ visit_time.name }}{% if not forloop.last %}, {% endif %}{% empty %}선택 없음{% endfor %}</dd>
+                                    </div>
+                                    <div>
+                                        <dt>방문 목적</dt>
+                                        <dd>{% for purpose in review.purposes.all %}{{ purpose.name }}{% if not forloop.last %}, {% endif %}{% empty %}선택 없음{% endfor %}</dd>
+                                    </div>
+                                    <div>
+                                        <dt>눈치지수</dt>
+                                        <dd>{% if review.nunchi_score == 1 %}낮음{% elif review.nunchi_score == 2 %}보통{% else %}높음{% endif %}</dd>
+                                    </div>
+                                    <div>
+                                        <dt>태그</dt>
+                                        <dd>{% for tag in review.tags.all %}#{{ tag.name }}{% if not forloop.last %} {% endif %}{% empty %}선택 없음{% endfor %}</dd>
+                                    </div>
+                                    <div>
+                                        <dt>추천 레벨</dt>
+                                        <dd>Lv.{{ review.recommended_level }}</dd>
+                                    </div>
+                                    <div>
+                                        <dt>키오스크</dt>
+                                        <dd>{% if review.has_kiosk %}있음{% else %}없음{% endif %}</dd>
+                                    </div>
+                                    <div>
+                                        <dt>1인석</dt>
+                                        <dd>{% if review.has_single_seat %}있음{% else %}없음{% endif %}</dd>
+                                    </div>
+                                    <div>
+                                        <dt>콘센트</dt>
+                                        <dd>{% if review.has_con %}있음{% else %}없음{% endif %}</dd>
+                                    </div>
+                                    <div>
+                                        <dt>와이파이</dt>
+                                        <dd>{% if review.has_wifi %}있음{% else %}없음{% endif %}</dd>
+                                    </div>
+                                    <div>
+                                        <dt>별점</dt>
+                                        <dd>{{ review.rating }}</dd>
+                                    </div>
+                                </dl>
+                            </span>
+                        </button>
+                    </div>
                 {% empty %}
                     <p class="brown-light-l">작성한 후기가 없습니다.</p>
                 {% endfor %}
@@ -143,6 +189,19 @@
             <button type="button" class="review-collection-close-button" id="review-collection-close-button">
                 닫기
             </button>
+        </div>
+    </div>
+
+    <div class="review-modal" id="mypage-review-modal">
+        <div class="review-modal-content">
+            <button type="button" class="review-modal-close" id="mypage-review-modal-close">
+                닫기
+            </button>
+
+            <div class="review-modal-user" id="mypage-review-modal-user"></div>
+            <p class="review-modal-text" id="mypage-review-modal-text"></p>
+            <div class="review-modal-details" id="mypage-review-modal-details"></div>
+            <div class="review-modal-meta" id="mypage-review-modal-meta"></div>
         </div>
     </div>
 

@@ -41,8 +41,8 @@ class Profile(models.Model):
         return f"/static/images/chick-stage-{self.level}.png"
 
     def display_image(self):
-        if self.image:
-            return self.image.url
+        if self.profile_image:
+            return self.profile_image.url
         return self.character_image()
         
     def __str__(self):

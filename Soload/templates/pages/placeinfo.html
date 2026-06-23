@@ -98,7 +98,11 @@
                         <article class="review-item review-item--clickable" tabindex="0" role="button" data-review-date="{{ review.created_at|date:'Y.m.d' }}">
                             <div class="review-user">
                                 <a href="{% url 'user_profile' review.writer.id %}" class="review-user-link">
-                                    <img src="{{ review.writer.profile.character_image }}" alt="{{ review.writer.profile.level_name }}" class="review_character-image">
+                                    {% if review.writer.profile.profile_image %}
+                                        <img src="{{ review.writer.profile.profile_image.url }}" alt="{{ review.writer.profile.level_name }}" class="review_character-image">
+                                    {% else %}
+                                        <img src="{{ review.writer.profile.character_image }}" alt="{{ review.writer.profile.level_name }}" class="review_character-image">
+                                    {% endif %}
 
                                     <div class="review-user-info">
                                         <span class="review-user-name">
@@ -392,7 +396,11 @@
                     <article class="all-review-item review-item--clickable" tabindex="0" role="button" data-review-date="{{ review.created_at|date:'Y.m.d' }}">
                         <div class="all-review-user review-user">
                             <a href="{% url 'user_profile' review.writer.id %}" class="review-user-link">
-                                <img src="{{ review.writer.profile.character_image }}" alt="{{ review.writer.profile.level_name }}" class="review_character-image">
+                                {% if review.writer.profile.profile_image %}
+                                    <img src="{{ review.writer.profile.profile_image.url }}" alt="{{ review.writer.profile.level_name }}" class="review_character-image">
+                                {% else %}
+                                    <img src="{{ review.writer.profile.character_image }}" alt="{{ review.writer.profile.level_name }}" class="review_character-image">
+                                {% endif %}
 
                                 <div class="review-user-info">
                                     <span class="review-user-name">

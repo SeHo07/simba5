@@ -13,7 +13,11 @@
         </div>
 
         <div class="result-character-box">
-            <img src="{{ user_profile.character_image }}" alt="{{ user_profile.level_name }}" class="result-character-image">
+            {% if user_profile.profile_image %}
+                <img src="{{ user_profile.profile_image.url }}" alt="{{ user_profile.level_name }}" class="result-character-image">
+            {% else %}
+                <img src="{{ user_profile.character_image }}" alt="{{ user_profile.level_name }}" class="result-character-image">
+            {% endif %}
         </div>
 
         <a href="{% url 'main' %}" class="soload-start-button">

@@ -52,6 +52,15 @@
     font-weight: 700;
 }
 
+.user-profile-title-row {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
 .mypage_exp-text{
     font-weight: 500;
     padding-top: 5px;
@@ -99,6 +108,70 @@
 
 .mypage_profile-edit-button:hover {
     background-color: var(--bg-main);
+}
+
+.follow-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+
+    margin-top: 14px;
+}
+
+.follow-stat-item {
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+
+    color: var(--darker, #713F12);
+    font-size: 15px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.follow-stat-item strong {
+    color: #111111;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.follow-stat-item:hover {
+    color: var(--dark-active, #A16207);
+}
+
+.follow-stat-item:focus {
+    outline: 2px solid var(--normal, #FDE047);
+    outline-offset: 2px;
+}
+
+.follow-btn button {
+    min-height: 36px;
+    padding: 0 14px;
+
+    border: 1px solid var(--normal, #FDE047);
+    border-radius: 18px;
+    background: #fff;
+
+    color: var(--darker, #713F12);
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.follow-btn button:hover {
+    background-color: var(--bg-main);
+}
+
+.follow-btn {
+    margin-left: auto;
+    flex: 0 0 auto;
+}
+
+.follow-btn a {
+    text-decoration: none;
 }
 
 .growth-section{
