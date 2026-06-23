@@ -23,6 +23,10 @@ def main(request):
     if level:
         places = places.filter(recommended_level=level)
 
+    liked_place_ids = set(
+        PlaceLike.objects.filter(user=request.user).values_list('place_id', flat=True)
+    )
+
     places_data = []
 
     for place in Place.objects.all():
@@ -47,6 +51,7 @@ def main(request):
         'active_nav': 'main',
         'category': category,
         'level': level,
+        'liked_place_ids': liked_place_ids,
     }) 
 
 def login(request):
@@ -223,12 +228,15 @@ def score_to_level(score):
 
 def place_like(request, place_id):
     if not request.user.is_authenticated:
-        return redirect('start')
+        return JsonResponse({'success': False}, status=403)
     place = get_object_or_404(Place, pk=place_id)
     like, created = PlaceLike.objects.get_or_create(user=request.user, place=place)
-    if not created:
+    if created:
+        liked = True
+    else:
         like.delete()
-    return redirect('placeinfo', place_id=place.id)
+        liked = False
+    return JsonResponse({'success': True, 'liked': liked})
 
 
 def create_place(request):
