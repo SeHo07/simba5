@@ -355,7 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const selectedTips = selectedHelp.levels[level];
 
         helpTitle.textContent = selectedHelp.title;
-        helpSubtitle.textContent = 'LV.{{ place.recommended_level }} 단계에 맞는 혼놀 도움말이에요.';
+        helpSubtitle.textContent = `LV.${helpDataElement.dataset.userLevel} 단계에 맞는 혼놀 도움말이에요.`;
 
         helpList.innerHTML = "";
 
@@ -387,4 +387,37 @@ document.addEventListener("DOMContentLoaded", function () {
             modal.classList.remove("active");
         }
     });
+
+    const detailMapContainer = document.getElementById("place-detail-map");
+
+    if (detailMapContainer) {
+        const lat = Number(detailMapContainer.dataset.lat);
+        const lng = Number(detailMapContainer.dataset.lng);
+        const name = detailMapContainer.dataset.name;
+
+        if (!Number.isNaN(lat) && !Number.isNaN(lng)) {
+
+            const position = new kakao.maps.LatLng(lat, lng);
+
+            const detailMap = new kakao.maps.Map(detailMapContainer, {
+                center: position,
+                level: 3
+            }); 
+
+            const marker = new kakao.maps.Marker({
+                map: detailMap,
+                position: position
+            });
+
+            const infoWindow = new kakao.maps.InfoWindow({
+                content: `
+                    <div style="padding:8px;font-size:13px;">
+                        ${name}
+                    </div>
+                `
+            });
+
+            infoWindow.open(detailMap, marker);
+        }
+    }
 });

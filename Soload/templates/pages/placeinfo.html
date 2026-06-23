@@ -6,7 +6,7 @@
 
 <main class="placeinfo-page">
 
-    <div id="help-data" data-category="{{ place.category }}" data-level="{{ user_profile.level }}">
+    <div id="help-data" data-category="{{ place.category }}" data-level="{{ place.recommended_level }}" data-user-level="{{ user.profile.level }}">
 
     </div>
     <section class="placeinfo-container">
@@ -22,13 +22,13 @@
                 </button>
             {% endif %}
 
-            <div class="place-photo-box">
+                <div class="place-photo-box">
                 {% for img in images %}
                     <img src="{{ img.image.url }}" alt="{{ place.name }}" class="place-photo-image{% if forloop.first %} place-photo-image--active{% endif %}">
                 {% empty %}
-                    <span class="brown-light-l">장소 사진이 없습니다.</span>
+                        <span class="brown-light-l">장소 사진이 없습니다.</span>
                 {% endfor %}
-            </div>
+                </div>
 
             {% if images|length > 1 %}
                 <button type="button" class="place-photo-button place-photo-button--next">
@@ -73,7 +73,7 @@
             <section class="review-preview-section">
                 <div class="section-header">
                     <div>사람들 한줄평</div>
-                    <a href="#" class="review-more-button">
+                    <a href="?same_level=1" class="review-more-button">
                         같은 레벨 후기만 보기
                     </a>
                 </div>
@@ -155,9 +155,7 @@
 
             <section class="place-map-card">
                 <div>위치</div>
-                    <div class="map-pin_box">
-                        <span class="place-map-pin">⌖</span>
-                    </div>
+                <div class="place-map-box" id="place-detail-map" data-lat="{{ place.latitude }}" data-lng="{{ place.longitude }}" data-name="{{ place.name }}"></div>
             </section>
 
             <section class="placeinfo-right">
@@ -316,5 +314,6 @@
     </div>
 </main>
 
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0eb280ffaedbceff3e438e6a20bc4fc3"></script>
 <script src="{% static 'js/placeinfo.js' %}?v=2"></script>
 {% endblock %}
