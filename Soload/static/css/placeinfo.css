@@ -221,6 +221,19 @@
     border-radius: 4px;
 }
 
+.review-item--clickable {
+    cursor: pointer;
+}
+
+.review-item--clickable:hover {
+    background: var(--light, #FFFBEA);
+}
+
+.review-item--clickable:focus {
+    outline: 2px solid var(--normal, #FDE047);
+    outline-offset: 2px;
+}
+
 .review-user,
 .review-meta {
     color: #000;
@@ -237,6 +250,10 @@
     color: var(--dark-active, #A16207);
     font-size: 13px;
     font-weight: 600;
+}
+
+.review-detail-data {
+    display: none;
 }
 
 .review-detail-link {
@@ -685,6 +702,218 @@ button{
 
 .help-close-button:active{
     transform: scale(0.97);
+}
+
+.review-modal {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1002;
+}
+
+.review-modal.active {
+    display: flex;
+}
+
+.review-modal-content {
+    width: 520px;
+    max-width: 90vw;
+    max-height: 80vh;
+
+    padding: 28px;
+
+    background: #fff;
+    border-radius: 16px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.review-modal-close {
+    float: right;
+
+    border: none;
+    background: #fff;
+
+    color: var(--darker, #713F12);
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.review-modal-user {
+    margin-bottom: 18px;
+    padding-right: 56px;
+
+    color: #111;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.review-modal-text {
+    margin: 0 0 22px;
+
+    color: var(--dark-active, #A16207);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.8;
+    white-space: pre-wrap;
+}
+
+.review-modal-details {
+    margin-bottom: 22px;
+}
+
+.review-detail-list {
+    margin: 0;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 18px;
+}
+
+.review-detail-list div {
+    min-width: 0;
+}
+
+.review-detail-list dt {
+    margin-bottom: 4px;
+
+    color: var(--darker, #713F12);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.review-detail-list dd {
+    margin: 0;
+
+    color: #333;
+    font-size: 14px;
+    line-height: 1.5;
+    word-break: keep-all;
+}
+
+.review-modal-meta {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.all-review-modal {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1001;
+}
+
+.all-review-modal.active {
+    display: flex;
+}
+
+.all-review-modal-content {
+    width: 760px;
+    max-width: 92vw;
+    max-height: 84vh;
+
+    padding: 28px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #fff;
+    border-radius: 16px;
+    box-sizing: border-box;
+}
+
+.all-review-modal-close {
+    align-self: flex-end;
+
+    border: none;
+    background: #fff;
+
+    color: var(--darker, #713F12);
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.all-review-modal-title {
+    margin-bottom: 18px;
+
+    color: var(--darker, #713F12);
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.all-review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding-right: 8px;
+    overflow-y: auto;
+}
+
+.all-review-item {
+    padding: 18px;
+
+    background: var(--lighter, #FFFEFA);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.all-review-item:hover {
+    background: var(--light, #FFFBEA);
+}
+
+.all-review-user {
+    margin-bottom: 10px;
+
+    color: #111;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.all-review-text {
+    margin: 0 0 16px;
+
+    color: var(--dark-active, #A16207);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.7;
+
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.all-review-meta {
+    color: #555;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.all-review-empty {
+    padding: 32px;
+    text-align: center;
+
+    color: var(--dark-active, #A16207);
+    font-size: 16px;
 }
 
 .place-map-box {

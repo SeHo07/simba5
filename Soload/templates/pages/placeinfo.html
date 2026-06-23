@@ -80,7 +80,7 @@
 
                 <div class="review-list">
                     {% for review in reviews|slice:":3" %}
-                        <article class="review-item">
+                        <article class="review-item review-item--clickable" tabindex="0" role="button">
                             <div class="review-user">
                                 {{ review.writer.profile.nickname }}
                                 (Lv.{{ review.writer.profile.level }})<br>
@@ -99,6 +99,50 @@
                                 태그 없음
                             {% endfor %}
                         </div>
+                        <div class="review-detail-data">
+                            <dl class="review-detail-list">
+                                <div>
+                                    <dt>방문 시간대</dt>
+                                    <dd>{% for visit_time in review.visit_times.all %}{{ visit_time.name }}{% if not forloop.last %}, {% endif %}{% empty %}선택 없음{% endfor %}</dd>
+                                </div>
+                                <div>
+                                    <dt>방문 목적</dt>
+                                    <dd>{% for purpose in review.purposes.all %}{{ purpose.name }}{% if not forloop.last %}, {% endif %}{% empty %}선택 없음{% endfor %}</dd>
+                                </div>
+                                <div>
+                                    <dt>눈치지수</dt>
+                                    <dd>{% if review.nunchi_score == 1 %}낮음{% elif review.nunchi_score == 2 %}보통{% else %}높음{% endif %}</dd>
+                                </div>
+                                <div>
+                                    <dt>태그</dt>
+                                    <dd>{% for tag in review.tags.all %}#{{ tag.name }}{% if not forloop.last %} {% endif %}{% empty %}선택 없음{% endfor %}</dd>
+                                </div>
+                                <div>
+                                    <dt>추천 레벨</dt>
+                                    <dd>Lv.{{ review.recommended_level }}</dd>
+                                </div>
+                                <div>
+                                    <dt>키오스크</dt>
+                                    <dd>{% if review.has_kiosk %}있음{% else %}없음{% endif %}</dd>
+                                </div>
+                                <div>
+                                    <dt>1인석</dt>
+                                    <dd>{% if review.has_single_seat %}있음{% else %}없음{% endif %}</dd>
+                                </div>
+                                <div>
+                                    <dt>콘센트</dt>
+                                    <dd>{% if review.has_con %}있음{% else %}없음{% endif %}</dd>
+                                </div>
+                                <div>
+                                    <dt>와이파이</dt>
+                                    <dd>{% if review.has_wifi %}있음{% else %}없음{% endif %}</dd>
+                                </div>
+                                <div>
+                                    <dt>별점</dt>
+                                    <dd>{{ review.rating }}</dd>
+                                </div>
+                            </dl>
+                        </div>
                     </article>
                     {% empty %}
                         <article class="review-item review-item--empty brown-light-l">
@@ -112,7 +156,7 @@
                     {% endfor %}
                 </div>
 
-                <a href="#" class="review-list-more">
+                <a href="#" class="review-list-more" id="review-list-more">
                     더 많은 후기 보기 &gt;
                 </a>
             </section>
@@ -301,6 +345,97 @@
             <button type="button" class="help-close-button" id="help-close-button">
                 닫기
             </button>
+        </div>
+    </div>
+
+    <div class="review-modal" id="review-modal">
+        <div class="review-modal-content">
+            <button type="button" class="review-modal-close" id="review-modal-close">
+                닫기
+            </button>
+
+            <div class="review-modal-user" id="review-modal-user"></div>
+            <p class="review-modal-text" id="review-modal-text"></p>
+            <div class="review-modal-details" id="review-modal-details"></div>
+            <div class="review-modal-meta" id="review-modal-meta"></div>
+        </div>
+    </div>
+    <div class="all-review-modal" id="all-review-modal">
+        <div class="all-review-modal-content">
+            <button type="button" class="all-review-modal-close" id="all-review-modal-close">
+                닫기
+            </button>
+
+            <div class="all-review-modal-title">전체 후기</div>
+
+            <div class="all-review-list">
+                {% for review in reviews %}
+                    <article class="all-review-item review-item--clickable" tabindex="0" role="button">
+                        <div class="all-review-user review-user">
+                            {{ review.writer.profile.nickname }}
+                            (Lv.{{ review.writer.profile.level }}) ·
+                            {{ review.created_at|date:"Y.m.d" }}
+                        </div>
+
+                        <p class="all-review-text review-text">{{ review.content }}</p>
+
+                        <div class="all-review-meta review-meta">
+                            {% for tag in review.tags.all %}
+                                #{{ tag.name }}
+                            {% empty %}
+                                태그 없음
+                            {% endfor %}
+                        </div>
+
+                        <div class="review-detail-data">
+                        <dl class="review-detail-list">
+                            <div>
+                                <dt>방문 시간대</dt>
+                                <dd>{% for visit_time in review.visit_times.all %}{{ visit_time.name }}{% if not forloop.last %}, {% endif %}{% empty %}선택 없음{% endfor %}</dd>
+                            </div>
+                            <div>
+                                <dt>방문 목적</dt>
+                                <dd>{% for purpose in review.purposes.all %}{{ purpose.name }}{% if not forloop.last %}, {% endif %}{% empty %}선택 없음{% endfor %}</dd>
+                            </div>
+                            <div>
+                                <dt>눈치지수</dt>
+                                <dd>{% if review.nunchi_score == 1 %}낮음{% elif review.nunchi_score == 2 %}보통{% else %}높음{% endif %}</dd>
+                            </div>
+                            <div>
+                                <dt>태그</dt>
+                                <dd>{% for tag in review.tags.all %}#{{ tag.name }}{% if not forloop.last %} {% endif %}{% empty %}선택 없음{% endfor %}</dd>
+                            </div>
+                            <div>
+                                <dt>추천 레벨</dt>
+                                <dd>Lv.{{ review.recommended_level }}</dd>
+                            </div>
+                            <div>
+                                <dt>키오스크</dt>
+                                <dd>{% if review.has_kiosk %}있음{% else %}없음{% endif %}</dd>
+                            </div>
+                            <div>
+                                <dt>1인석</dt>
+                                <dd>{% if review.has_single_seat %}있음{% else %}없음{% endif %}</dd>
+                            </div>
+                            <div>
+                                <dt>콘센트</dt>
+                                <dd>{% if review.has_con %}있음{% else %}없음{% endif %}</dd>
+                            </div>
+                            <div>
+                                <dt>와이파이</dt>
+                                <dd>{% if review.has_wifi %}있음{% else %}없음{% endif %}</dd>
+                            </div>
+                            <div>
+                                <dt>별점</dt>
+                                <dd>{{ review.rating }}</dd>
+                            </div>
+                        </dl>
+                        </div>
+                    </article>
+                {% empty %}
+                    <div class="all-review-empty">등록된 후기가 없습니다.</div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </main>

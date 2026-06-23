@@ -440,6 +440,90 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    const reviewModal = document.getElementById("review-modal");
+    const reviewModalClose = document.getElementById("review-modal-close");
+    const reviewModalUser = document.getElementById("review-modal-user");
+    const reviewModalText = document.getElementById("review-modal-text");
+    const reviewModalDetails = document.getElementById("review-modal-details");
+    const reviewModalMeta = document.getElementById("review-modal-meta");
+    const reviewItems = document.querySelectorAll(".review-item--clickable");
+
+    function closeReviewModal() {
+        if (reviewModal) {
+            reviewModal.classList.remove("active");
+        }
+    }
+
+    function openReviewModal(reviewItem) {
+        if (!reviewModal || !reviewModalUser || !reviewModalText || !reviewModalDetails || !reviewModalMeta) {
+            return;
+        }
+
+        const parentAllReviewModal = reviewItem.closest("#all-review-modal");
+        const user = reviewItem.querySelector(".review-user");
+        const text = reviewItem.querySelector(".review-text");
+        const details = reviewItem.querySelector(".review-detail-data");
+        const meta = reviewItem.querySelector(".review-meta");
+
+        if (parentAllReviewModal) {
+            parentAllReviewModal.classList.remove("active");
+        }
+
+        reviewModalUser.textContent = user ? user.textContent.trim() : "";
+        reviewModalText.textContent = text ? text.textContent.trim() : "";
+        reviewModalDetails.innerHTML = details ? details.innerHTML : "";
+        reviewModalMeta.textContent = meta ? meta.textContent.trim() : "";
+        reviewModal.classList.add("active");
+    }
+
+    reviewItems.forEach(function (reviewItem) {
+        reviewItem.addEventListener("click", function () {
+            openReviewModal(reviewItem);
+        });
+
+        reviewItem.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openReviewModal(reviewItem);
+            }
+        });
+    });
+
+    if (reviewModal && reviewModalClose) {
+        reviewModalClose.addEventListener("click", closeReviewModal);
+
+        reviewModal.addEventListener("click", function (event) {
+            if (event.target === reviewModal) {
+                closeReviewModal();
+            }
+        });
+    }
+
+    const reviewListMore = document.getElementById("review-list-more");
+    const allReviewModal = document.getElementById("all-review-modal");
+    const allReviewModalClose = document.getElementById("all-review-modal-close");
+
+    function closeAllReviewModal() {
+        if (allReviewModal) {
+            allReviewModal.classList.remove("active");
+        }
+    }
+
+    if (reviewListMore && allReviewModal && allReviewModalClose) {
+        reviewListMore.addEventListener("click", function (event) {
+            event.preventDefault();
+            allReviewModal.classList.add("active");
+        });
+
+        allReviewModalClose.addEventListener("click", closeAllReviewModal);
+
+        allReviewModal.addEventListener("click", function (event) {
+            if (event.target === allReviewModal) {
+                closeAllReviewModal();
+            }
+        });
+    }
+
     const detailMapContainer = document.getElementById("place-detail-map");
 
     if (detailMapContainer) {
