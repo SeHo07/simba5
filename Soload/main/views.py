@@ -208,6 +208,7 @@ def createreview(request, place_id):
         'tags': Tag.objects.filter(group__in=[group, 'common']),
         'visit_times': VisitTime.objects.all(),
         'purposes': Purpose.objects.filter(group__in=[group, 'common']),
+        'stay_choices': Review._meta.get_field('stay_time').choices,
         }
         )
 

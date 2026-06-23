@@ -11,9 +11,23 @@
     <!-- 장소 DB내용으로 변경 필요-->
     <span class="subtitle-brown"><i class="fa-solid fa-location-dot"></i>  장소 정보: {{ place.name }}</span>
 </div>
-<form method="post" id="review-form" enctype="multipart/form-data">
+<form method="post" id="review-form" enctype="multipart/form-data" data-group="{{ group }}">
     {% csrf_token %}
-<div class="review_main">
+<div class="review_main review_main--{{ group }}">
+    <div class="review_write review_write--culture">
+        <div class="review_write_header">
+            <span class="brown-dark-l">4. 체류시간</span>
+            <span class="brown-light-s">관련 시간을 자유롭게 골라주세요.</span>
+        </div>
+        <div class="stay_time_box_group">
+            {% for value, label in stay_choices %}
+            <label class="stay_time_box">
+                <input type="radio" name="stay_time" value="{{ value }}">
+                <span class="subtitle-brown">{{ label }}</span>
+            </label>
+            {% endfor %}
+        </div>
+    </div>
     <div class="review_write">
         <div class="review_write_header">
             <span class="brown-dark-l">1. 방문 시간대</span>
