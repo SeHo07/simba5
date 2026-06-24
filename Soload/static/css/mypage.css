@@ -110,6 +110,11 @@
     background-color: var(--bg-main);
 }
 
+.user-profile-title-row .mypage_profile-edit-button {
+    flex: 0 0 auto;
+    margin-top: 0;
+}
+
 .follow-stats {
     display: flex;
     flex-wrap: wrap;
@@ -172,6 +177,119 @@
 
 .follow-btn a {
     text-decoration: none;
+}
+
+.follow-list-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.follow-list-modal.active {
+    display: flex;
+}
+
+.follow-list-modal-content {
+    width: min(90vw, 440px);
+    max-height: 80vh;
+    padding: 40px 36px 28px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    border-radius: 20px;
+    background: var(--light, #FFFBEA);
+    box-sizing: border-box;
+}
+
+.follow-list-modal-title {
+    margin-bottom: 28px;
+
+    color: var(--darker, #713F12);
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.follow-list {
+    max-height: 48vh;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.follow-list-item {
+    min-height: 68px;
+    padding: 10px 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    border-radius: 16px;
+    background: #ffffff;
+
+    color: inherit;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.follow-list-item:hover {
+    background: var(--bg-main);
+}
+
+.follow-list-image {
+    width: 48px;
+    height: 48px;
+
+    flex: 0 0 auto;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.follow-list-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.follow-list-info strong {
+    color: #111111;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.follow-list-info span {
+    color: var(--darker, #713F12);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.follow-list-close-button {
+    width: 90px;
+    height: 44px;
+    margin: 28px auto 0;
+
+    border: none;
+    background: #ffffff;
+
+    color: #111111;
+    font-size: 17px;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .growth-section{

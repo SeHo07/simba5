@@ -192,6 +192,58 @@
         </div>
     </div>
 
+    <div class="follow-list-modal" id="follower-modal">
+        <div class="follow-list-modal-content">
+            <div class="follow-list-modal-title">
+                팔로워
+            </div>
+
+            <div class="follow-list">
+                {% for follower in user_profile.followers.all %}
+                    <a href="{% if follower.user == request.user %}{% url 'mypage' %}{% else %}{% url 'user_profile' follower.user.id %}{% endif %}" class="follow-list-item">
+                        <img src="{{ follower.display_image }}" alt="{{ follower.level_name }}" class="follow-list-image">
+                        <div class="follow-list-info">
+                            <strong>{{ follower.nickname|default:follower.user.username }}</strong>
+                            <span>Lv.{{ follower.level }} {{ follower.level_name }}</span>
+                        </div>
+                    </a>
+                {% empty %}
+                    <p class="brown-light-l">아직 팔로워가 없습니다.</p>
+                {% endfor %}
+            </div>
+
+            <button type="button" class="follow-list-close-button" id="follower-modal-close">
+                닫기
+            </button>
+        </div>
+    </div>
+
+    <div class="follow-list-modal" id="following-modal">
+        <div class="follow-list-modal-content">
+            <div class="follow-list-modal-title">
+                팔로잉
+            </div>
+
+            <div class="follow-list">
+                {% for following in user_profile.followings.all %}
+                    <a href="{% if following.user == request.user %}{% url 'mypage' %}{% else %}{% url 'user_profile' following.user.id %}{% endif %}" class="follow-list-item">
+                        <img src="{{ following.display_image }}" alt="{{ following.level_name }}" class="follow-list-image">
+                        <div class="follow-list-info">
+                            <strong>{{ following.nickname|default:following.user.username }}</strong>
+                            <span>Lv.{{ following.level }} {{ following.level_name }}</span>
+                        </div>
+                    </a>
+                {% empty %}
+                    <p class="brown-light-l">아직 팔로잉한 유저가 없습니다.</p>
+                {% endfor %}
+            </div>
+
+            <button type="button" class="follow-list-close-button" id="following-modal-close">
+                닫기
+            </button>
+        </div>
+    </div>
+
     <div class="review-modal" id="mypage-review-modal">
         <div class="review-modal-content">
             <button type="button" class="review-modal-close" id="mypage-review-modal-close">

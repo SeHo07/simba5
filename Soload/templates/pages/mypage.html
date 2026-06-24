@@ -12,9 +12,15 @@
         </div>
 
         <div class = "mypage_level-info">
-            <span class = "mypage_level-title brown-dark-xl">
-                {{ user_profile.nickname|default:user_profile.user.username }}
-            </span>
+            <div class="user-profile-title-row">
+                <span class = "mypage_level-title brown-dark-xl">
+                    {{ user_profile.nickname|default:user_profile.user.username }}
+                </span>
+
+                <button type="button" class="mypage_profile-edit-button" id="profile-edit-button">
+                    정보수정
+                </button>
+            </div>
             
 
             <span class = "mypage_level-discription brown-light-m">
@@ -31,9 +37,16 @@
                 </div>
             </div>
 
-            <button type="button" class="mypage_profile-edit-button" id="profile-edit-button">
-                정보수정
-            </button>
+            <div class="follow-stats">
+                <span class="follow-stat-item" id="follower-button" role="button" tabindex="0">
+                    <strong>{{ user_profile.followers.count }}</strong>
+                    <span>팔로워</span>
+                </span>
+                <span class="follow-stat-item" id="following-button" role="button" tabindex="0">
+                    <strong>{{ user_profile.followings.count }}</strong>
+                    <span>팔로잉</span>
+                </span>
+            </div>
         </div>
     </section>
 
@@ -217,6 +230,58 @@
             </div>
 
             <button type="button" class="review-collection-close-button" id="review-collection-close-button">
+                닫기
+            </button>
+        </div>
+    </div>
+
+    <div class="follow-list-modal" id="follower-modal">
+        <div class="follow-list-modal-content">
+            <div class="follow-list-modal-title">
+                팔로워
+            </div>
+
+            <div class="follow-list">
+                {% for follower in user_profile.followers.all %}
+                    <a href="{% if follower.user == request.user %}{% url 'mypage' %}{% else %}{% url 'user_profile' follower.user.id %}{% endif %}" class="follow-list-item">
+                        <img src="{{ follower.display_image }}" alt="{{ follower.level_name }}" class="follow-list-image">
+                        <div class="follow-list-info">
+                            <strong>{{ follower.nickname|default:follower.user.username }}</strong>
+                            <span>Lv.{{ follower.level }} {{ follower.level_name }}</span>
+                        </div>
+                    </a>
+                {% empty %}
+                    <p class="brown-light-l">아직 팔로워가 없습니다.</p>
+                {% endfor %}
+            </div>
+
+            <button type="button" class="follow-list-close-button" id="follower-modal-close">
+                닫기
+            </button>
+        </div>
+    </div>
+
+    <div class="follow-list-modal" id="following-modal">
+        <div class="follow-list-modal-content">
+            <div class="follow-list-modal-title">
+                팔로잉
+            </div>
+
+            <div class="follow-list">
+                {% for following in user_profile.followings.all %}
+                    <a href="{% if following.user == request.user %}{% url 'mypage' %}{% else %}{% url 'user_profile' following.user.id %}{% endif %}" class="follow-list-item">
+                        <img src="{{ following.display_image }}" alt="{{ following.level_name }}" class="follow-list-image">
+                        <div class="follow-list-info">
+                            <strong>{{ following.nickname|default:following.user.username }}</strong>
+                            <span>Lv.{{ following.level }} {{ following.level_name }}</span>
+                        </div>
+                    </a>
+                {% empty %}
+                    <p class="brown-light-l">아직 팔로잉한 유저가 없습니다.</p>
+                {% endfor %}
+            </div>
+
+            <button type="button" class="follow-list-close-button" id="following-modal-close">
                 닫기
             </button>
         </div>

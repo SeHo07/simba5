@@ -909,14 +909,71 @@ button{
     overflow-y: auto;
 }
 
-.review-modal-close {
-    float: right;
+.review-modal-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+
+    margin-bottom: 18px;
+}
+
+.review-modal-actions {
+    display: none;
+    align-items: center;
+    gap: 6px;
+}
+
+.review-modal-actions.active {
+    display: flex;
+}
+
+.review-modal-action {
+    min-width: 46px;
+    height: 30px;
+    padding: 0 10px;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 
     border: none;
+    border-radius: 15px;
+
+    color: var(--darker, #713F12);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.review-modal-action--edit {
+    background: var(--normal, #FDE047);
+}
+
+.review-modal-action--delete {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.review-modal-delete-form {
+    margin: 0;
+}
+
+.review-modal-close {
+    min-width: 46px;
+    height: 30px;
+    padding: 0 10px;
+
+    border: none;
+    border-radius: 15px;
     background: #fff;
 
     color: var(--darker, #713F12);
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 700;
 
     cursor: pointer;

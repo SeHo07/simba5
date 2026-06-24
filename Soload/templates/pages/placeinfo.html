@@ -95,7 +95,16 @@
 
                 <div class="review-list">
                     {% for review in reviews|slice:":3" %}
-                        <article class="review-item review-item--clickable" tabindex="0" role="button" data-review-date="{{ review.created_at|date:'Y.m.d' }}">
+                        <article
+                            class="review-item review-item--clickable"
+                            tabindex="0"
+                            role="button"
+                            data-review-date="{{ review.created_at|date:'Y.m.d' }}"
+                            {% if request.user == review.writer %}
+                                data-review-edit-url="{% url 'review_update' review.id %}"
+                                data-review-delete-url="{% url 'review_delete' review.id %}"
+                            {% endif %}
+                        >
                             <div class="review-user">
                                 <a href="{% url 'user_profile' review.writer.id %}" class="review-user-link">
                                     {% if review.writer.profile.profile_image %}
@@ -373,9 +382,24 @@
 
     <div class="review-modal" id="review-modal">
         <div class="review-modal-content">
-            <button type="button" class="review-modal-close" id="review-modal-close">
-                닫기
-            </button>
+            <div class="review-modal-header">
+                <div class="review-modal-actions" id="review-modal-actions">
+                    <a href="#" class="review-modal-action review-modal-action--edit" id="review-modal-edit">
+                        수정
+                    </a>
+
+                    <form method="post" class="review-modal-delete-form" id="review-modal-delete-form">
+                        {% csrf_token %}
+                        <button type="submit" class="review-modal-action review-modal-action--delete">
+                            삭제
+                        </button>
+                    </form>
+                </div>
+
+                <button type="button" class="review-modal-close" id="review-modal-close">
+                    닫기
+                </button>
+            </div>
 
             <div class="review-modal-user" id="review-modal-user"></div>
             <p class="review-modal-text" id="review-modal-text"></p>
@@ -393,7 +417,16 @@
 
             <div class="all-review-list">
                 {% for review in reviews %}
-                    <article class="all-review-item review-item--clickable" tabindex="0" role="button" data-review-date="{{ review.created_at|date:'Y.m.d' }}">
+                    <article
+                        class="all-review-item review-item--clickable"
+                        tabindex="0"
+                        role="button"
+                        data-review-date="{{ review.created_at|date:'Y.m.d' }}"
+                        {% if request.user == review.writer %}
+                            data-review-edit-url="{% url 'review_update' review.id %}"
+                            data-review-delete-url="{% url 'review_delete' review.id %}"
+                        {% endif %}
+                    >
                         <div class="all-review-user review-user">
                             <a href="{% url 'user_profile' review.writer.id %}" class="review-user-link">
                                 {% if review.writer.profile.profile_image %}

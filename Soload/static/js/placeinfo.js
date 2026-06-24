@@ -501,6 +501,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const reviewModalText = document.getElementById("review-modal-text");
     const reviewModalDetails = document.getElementById("review-modal-details");
     const reviewModalMeta = document.getElementById("review-modal-meta");
+    const reviewModalActions = document.getElementById("review-modal-actions");
+    const reviewModalEdit = document.getElementById("review-modal-edit");
+    const reviewModalDeleteForm = document.getElementById("review-modal-delete-form");
     const reviewItems = document.querySelectorAll(".review-item--clickable");
 
     function closeReviewModal() {
@@ -520,9 +523,23 @@ document.addEventListener("DOMContentLoaded", function () {
         const details = reviewItem.querySelector(".review-detail-data");
         const meta = reviewItem.querySelector(".review-meta");
         const reviewDate = reviewItem.dataset.reviewDate;
+        const editUrl = reviewItem.dataset.reviewEditUrl;
+        const deleteUrl = reviewItem.dataset.reviewDeleteUrl;
 
         if (parentAllReviewModal) {
             parentAllReviewModal.classList.remove("active");
+        }
+
+        if (reviewModalActions && reviewModalEdit && reviewModalDeleteForm) {
+            if (editUrl && deleteUrl) {
+                reviewModalEdit.href = editUrl;
+                reviewModalDeleteForm.action = deleteUrl;
+                reviewModalActions.classList.add("active");
+            } else {
+                reviewModalEdit.removeAttribute("href");
+                reviewModalDeleteForm.removeAttribute("action");
+                reviewModalActions.classList.remove("active");
+            }
         }
 
         reviewModalUser.innerHTML = user ? user.innerHTML : "";
@@ -555,6 +572,16 @@ document.addEventListener("DOMContentLoaded", function () {
         reviewModal.addEventListener("click", function (event) {
             if (event.target === reviewModal) {
                 closeReviewModal();
+            }
+        });
+    }
+
+    if (reviewModalDeleteForm) {
+        reviewModalDeleteForm.addEventListener("submit", function (event) {
+            const shouldDelete = confirm("후기를 삭제할까요?");
+
+            if (!shouldDelete) {
+                event.preventDefault();
             }
         });
     }

@@ -11,6 +11,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const profileEditModal = document.getElementById("profile-edit-modal");
     const profileEditCloseButton = document.getElementById("profile-edit-close-button");
 
+    const followerButton = document.getElementById("follower-button");
+    const followerModal = document.getElementById("follower-modal");
+    const followerModalClose = document.getElementById("follower-modal-close");
+    const followingButton = document.getElementById("following-button");
+    const followingModal = document.getElementById("following-modal");
+    const followingModalClose = document.getElementById("following-modal-close");
+
     const reviewDetailOpenButtons = document.querySelectorAll(".review-detail-open-button");
     const reviewDetailModal = document.getElementById("mypage-review-modal");
     const reviewDetailCloseButton = document.getElementById("mypage-review-modal-close");
@@ -66,6 +73,40 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
+    function bindModalTrigger(openButton, modal, closeButton) {
+        if (!openButton || !modal || !closeButton) {
+            return;
+        }
+
+        function openModal() {
+            modal.classList.add("active");
+        }
+
+        function closeModal() {
+            modal.classList.remove("active");
+        }
+
+        openButton.addEventListener("click", openModal);
+
+        openButton.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openModal();
+            }
+        });
+
+        closeButton.addEventListener("click", closeModal);
+
+        modal.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    }
+
+    bindModalTrigger(followerButton, followerModal, followerModalClose);
+    bindModalTrigger(followingButton, followingModal, followingModalClose);
 
     if (
         reviewDetailModal &&
